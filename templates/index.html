@@ -148,7 +148,6 @@
             <th>Tax Rebates</th>
             <th>Get In Touch</th>
             <th>Quote Price</th>
-            <th>Action</th>
             <!-- Add more column headers as needed -->
         </tr>
         {% for record in records %}
@@ -173,7 +172,6 @@
             <td>{{ record['TaxRebates'] if not record['TaxRebates'] != record['TaxRebates'] else '' }}</td>
             <td>{{ record['GetInTouch'] if not record['GetInTouch'] != record['GetInTouch'] else '' }}</td>
             <td>{{ record['QuotePrice'] if not record['QuotePrice'] != record['QuotePrice'] else '' }}</td>
-            <td><button onclick="deleteRecord('{{ record['Index'] }}')">Delete</button></td>
             <!-- Add more columns as needed -->
         </tr>
         {% endfor %}
@@ -183,29 +181,6 @@
         function downloadRecords() {
             // Redirect the user to the download endpoint
             window.location.href = "/download";
-        }
-
-        function deleteRecord(index) {
-            // Send an AJAX request to delete the record
-            fetch('/delete_record', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ index: index })
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Reload the page after successful deletion
-                    location.reload();
-                } else {
-                    // Handle error
-                    console.error('Failed to delete record');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
         }
 
     </script>
