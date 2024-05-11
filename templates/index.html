@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type=text] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .download-button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .download-button:hover {
+            background-color: #005f6b;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .title {
+            text-align: center;
+            margin: 0;
+        }
+
+        .download-button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .download-button:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="title">Numericx Quote Database</h1>
+        <button onclick="downloadRecords()" class="download-button">Download Records in Excel</button>
+    </div>
+
+
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Timestamp</th>
+            <th>Name</th>
+            <th>Business Name</th>
+            <th>Email</th>
+            <th>Business Type</th>
+            <th>Phone</th>
+            <th>Annual Turnover</th>
+            <th>Company Registration</th>
+            <th>Bookkeeping</th>
+            <th>VAT Returns</th>
+            <th>Payroll</th>
+            <th>Payslips Per Month</th>
+            <th>Service Duration</th>
+            <th>Tax Rebates</th>
+            <th>Get In Touch</th>
+            <th>Quote Price</th>
+            <th>Action</th>
+            <!-- Add more column headers as needed -->
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record['Index'] if not record['Counter'] != record['Counter'] else '' }}</td>
+            <td>{{ record['Timestamp'] if not record['Timestamp'] != record['Timestamp'] else '' }}</td>
+            <td>{{ record['Name'] if not record['Name'] != record['Name'] else '' }}</td>
+            <td>{{ record['BusinessName'] if not record['BusinessName'] != record['BusinessName'] else '' }}</td>
+            <td>{{ record['Email'] if not record['Email'] != record['Email'] else '' }}</td>
+            <td>{{ record['BusinessType'] if not record['BusinessType'] != record['BusinessType'] else '' }}</td>
+            <td>{{ record['Phone'] if not record['Phone'] != record['Phone'] else '' }}</td>
+            <td>{{ record['AnnualTurnover'] if not record['AnnualTurnover'] != record['AnnualTurnover'] else '' }}</td>
+            <td>{{ record['CompanyRegistration'] if not record['CompanyRegistration'] != record['CompanyRegistration']
+                else '' }}</td>
+            <td>{{ record['Bookkeeping'] if not record['Bookkeeping'] != record['Bookkeeping'] else '' }}</td>
+            <td>{{ record['VATReturns'] if not record['VATReturns'] != record['VATReturns'] else '' }}</td>
+            <td>{{ record['Payroll'] if not record['Payroll'] != record['Payroll'] else '' }}</td>
+            <td>{{ record['PayslipsPerMonth'] if not record['PayslipsPerMonth'] != record['PayslipsPerMonth'] else '' }}
+            </td>
+            <td>{{ record['ServiceDuration'] if not record['ServiceDuration'] != record['ServiceDuration'] else '' }}
+            </td>
+            <td>{{ record['TaxRebates'] if not record['TaxRebates'] != record['TaxRebates'] else '' }}</td>
+            <td>{{ record['GetInTouch'] if not record['GetInTouch'] != record['GetInTouch'] else '' }}</td>
+            <td>{{ record['QuotePrice'] if not record['QuotePrice'] != record['QuotePrice'] else '' }}</td>
+            <td><button onclick="deleteRecord('{{ record['Index'] }}')">Delete</button></td>
+            <!-- Add more columns as needed -->
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        function downloadRecords() {
+            // Redirect the user to the download endpoint
+            window.location.href = "/download";
+        }
+
+        function deleteRecord(index) {
+            // Send an AJAX request to delete the record
+            fetch('/delete_record', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ index: index })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Reload the page after successful deletion
+                    location.reload();
+                } else {
+                    // Handle error
+                    console.error('Failed to delete record');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
+</body>
+
+</html>
