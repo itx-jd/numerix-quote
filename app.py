@@ -49,9 +49,7 @@ def add_record():
         'Payroll': data.get('payroll', ''),
         'PayslipsPerMonth': data.get('payslipsPerMonth', ''),
         'ServiceDuration': data.get('serviceDuration', ''),
-        'TaxRebates': data.get('taxRebates', ''),
-        'GetInTouch': data.get('getInTouch', ''),
-        'QuotePrice': data.get('quotePrice', '')  # Add the field for Quote Price
+        'QuotePrice': data.get('quotePrice', '')
     }
 
     # Convert the data into a DataFrame

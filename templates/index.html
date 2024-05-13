@@ -145,8 +145,6 @@
             <th>Payroll</th>
             <th>Payslips Per Month</th>
             <th>Service Duration</th>
-            <th>Tax Rebates</th>
-            <th>Get In Touch</th>
             <th>Quote Price</th>
             <!-- Add more column headers as needed -->
         </tr>
@@ -169,8 +167,6 @@
             </td>
             <td>{{ record['ServiceDuration'] if not record['ServiceDuration'] != record['ServiceDuration'] else '' }}
             </td>
-            <td>{{ record['TaxRebates'] if not record['TaxRebates'] != record['TaxRebates'] else '' }}</td>
-            <td>{{ record['GetInTouch'] if not record['GetInTouch'] != record['GetInTouch'] else '' }}</td>
             <td>{{ record['QuotePrice'] if not record['QuotePrice'] != record['QuotePrice'] else '' }}</td>
             <!-- Add more columns as needed -->
         </tr>
