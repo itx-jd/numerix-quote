@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type=text] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 50%;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .download-button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .download-button:hover {
+            background-color: #005f6b;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .title {
+            text-align: center;
+            margin: 0;
+        }
+
+        .download-button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .download-button:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="title">Numericx Quote Database</h1>
+        <button onclick="downloadRecords()" class="download-button">Download Records in Excel</button>
+    </div>
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Timestamp</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Service Type</th>
+            <th>Message</th>
+            <!-- Add more column headers as needed -->
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record['Index'] if not record['Index'] != record['Index'] else '' }}</td>
+            <td>{{ record['Timestamp'] if not record['Timestamp'] != record['Timestamp'] else '' }}</td>
+            <td>{{ record['Name'] if not record['Name'] != record['Name'] else '' }}</td>
+            <td>{{ record['Email'] if not record['Email'] != record['Email'] else '' }}</td>
+            <td>{{ record['Phone'] if not record['Phone'] != record['Phone'] else '' }}</td>
+            <td>{{ record['ServiceType'] if not record['ServiceType'] != record['ServiceType'] else '' }}</td>
+            <td>{{ record['Message'] if not record['Message'] != record['Message'] else '' }}</td>
+            <!-- Add more columns as needed -->
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <script>
+        function downloadRecords() {
+            // Redirect the user to the download endpoint
+            window.location.href = "/download_popup";
+        }
+
+    </script>
+</body>
+
+</html>
